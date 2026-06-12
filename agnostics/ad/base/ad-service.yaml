@@ -61,7 +61,7 @@ spec:
       labels:
         app: samba
       annotations:
-        external-dns.alpha.kubernetes.io/internal-hostname: "dc0.ad.${DOMAIN}"
+        external-dns.alpha.kubernetes.io/internal-hostname: "dc0.ad.${DOMAIN},dc0.${DOMAIN}"
         external-dns.alpha.kubernetes.io/access: private
     spec:
       hostname: dc0
@@ -115,7 +115,7 @@ spec:
                 command:
                   - "sh"
                   - "-c"
-                  - "/samba-start.sh 2>&1 > /startup.log"
+                  - "/samba-start.sh 2>&1 | tee /startup.log"
           livenessProbe:
             exec:
               command:
